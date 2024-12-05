@@ -91,7 +91,7 @@ public class MyString {
         String spaced = "";
         //empty string returns a space
         if (str == ""){
-            return " ";
+            return spaced;
         }
 
         for (int i = 0; i < str.length(); i++){

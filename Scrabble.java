@@ -69,25 +69,28 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		String runi = "runi";
-		word = word.toLowerCase();
 		int score = 0;
+		int thisScore = 0;
 	
-		// Add bonus for word length == 10
-		if (word.length() == word.length()) {
-			score += 50;
-		}
 	
 		// Add scrabble letter values for each character in the word
 		for (int i = 0; i < word.length(); i++) {
 			char letter = word.charAt(i);
 			// Calculate the index directly (0 for 'a', 1 for 'b', etc.)
-			int index = letter - 'a';  
-			score += SCRABBLE_LETTER_VALUES[index];
+			int index = letter - 'a'; 
+			thisScore = SCRABBLE_LETTER_VALUES[index];
+			score += (thisScore * word.length());
+			thisScore = 0;
 		}
 	
 		// Add bonus for "runi"
-		if (word.contains(runi)) {
+		if (MyString.subsetOf(runi, word)) {
 			score += 1000;
+		}
+
+		// Add bonus for word length == 10
+		if (word.length() == 10) {
+			score += 50;
 		}
 	
 		return score;

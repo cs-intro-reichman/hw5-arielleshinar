@@ -150,7 +150,6 @@ public class Scrabble {
 
 				// If user finishes the hand
 			if (input.equals(dot)) {
-				System.out.println("End of hand. Total score: " + score + " points");
 				break;
 
 			} // Check if word can be formed from hand
@@ -173,7 +172,10 @@ public class Scrabble {
 		
 		}
 		if (hand.length() == 0) {
-			System.out.println("End of hand. Total score: " + score + " points");		}
+			System.out.println("End of hand. Total score: " + score + " points");	
+			} else {
+				System.out.println("End of hand. Total score: " + score + " points");
+			}
 	}
 	
 	

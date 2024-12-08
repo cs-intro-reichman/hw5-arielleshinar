@@ -169,51 +169,50 @@ public class Scrabble {
 	 */
 	public static void playHand(String hand) {
 		int score = 0;
-		int wordCount = 1;  // To track the number of words played
 		String dot = ".";
 		In in = new In();
 	
-		// Store whether any valid word was played
+		// Flag to check if at least one word is played
 		boolean validWordPlayed = false;
 	
 		while (hand.length() > 0) {
+			// Only print the current hand once at the start of the loop
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
 	
 			String input = in.readString().trim();
 	
+			// If the user inputs '.', end the hand
 			if (input.equals(dot)) {
 				System.out.println("End of hand. Total score: " + score + " points");
 				break;  // End the hand
 			}
 	
-			// Check if the word is valid
+			// Check if the word can be made from the available letters in the hand
 			if (!MyString.subsetOf(input, hand)) {
-				// Instead of printing "Invalid word", simply skip and ask again
+				// If it's not possible to make the word from the hand, skip it silently
 				continue;
 			}
 	
+			// Check if the word is in the dictionary
 			if (!isWordInDictionary(input)) {
-				// Skip if word is not in dictionary (keep this in case the test wants invalid word handling)
+				// If it's not a valid word in the dictionary, skip it silently
 				continue;
 			}
 	
-			// Word is valid, process it
+			// Word is valid, calculate its score
 			int wordScore = wordScore(input);
 			score += wordScore;
-			hand = remove(hand, input);  // Remove letters used for the word
+			hand = remove(hand, input);  // Remove the used letters from the hand
 	
-			// Output the word and its score as expected by the test
+			// Output the word and score in the required format
 			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
 	
-			// Track the valid word played to adjust expected output
+			// Mark that a valid word was played
 			validWordPlayed = true;
-	
-			// Move to next word count
-			wordCount++;
 		}
 	
-		// End of hand output
+		// Final check if we exhausted the letters in the hand
 		if (validWordPlayed && hand.length() == 0) {
 			System.out.println("Ran out of letters. Total score: " + score + " points");
 		}

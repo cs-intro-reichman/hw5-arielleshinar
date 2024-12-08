@@ -154,10 +154,12 @@ public class Scrabble {
 
 			} // Check if word can be formed from hand
 			if (!MyString.subsetOf(input, hand)) {
+				System.out.println("Invalid word. Try again.");
 				continue;  // Skip invalid word, don't print anything
 			}
 			// Check if word is in the dictionary
 			if (!isWordInDictionary(input)) {
+				System.out.println("No such word in the dictionary. Try again.");
 				continue;  // Skip invalid word, don't print anything
 			}
 				// Calculate score for the word
@@ -178,9 +180,6 @@ public class Scrabble {
 			}
 	}
 	
-	
-	
-
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
 	// to end the game. If the user enters any other input, writes an error message.
 	public static void playGame() {

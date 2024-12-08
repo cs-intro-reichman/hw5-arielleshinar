@@ -70,26 +70,27 @@ public class Scrabble {
 	public static int wordScore(String word) {
 		String runi = "runi";
 		int score = 0;
-		int thisScore = 0;
+
 	
 	
 		// Add scrabble letter values for each character in the word
 		for (int i = 0; i < word.length(); i++) {
 			char letter = word.charAt(i);
-			// Calculate the index directly (0 for 'a', 1 for 'b', etc.)
-			int index = letter - 'a'; 
-			thisScore = SCRABBLE_LETTER_VALUES[index];
-			score += (thisScore * word.length());
-			thisScore = 0;
+			if (letter >= 'a' && letter <= 'z'){
+				int index = letter - 'a'; 
+				score += SCRABBLE_LETTER_VALUES[index];
+			}
 		}
+			score *= word.length();
+	
 	
 		// Add bonus for "runi"
-		if (MyString.subsetOf(runi, word)) {
+		if (MyString.subsetOf(runi, word) == true) {
 			score += 1000;
 		}
 
 		// Add bonus for word length == 10
-		if (word.length() == 10) {
+		if (word.length() == 10){
 			score += 50;
 		}
 	

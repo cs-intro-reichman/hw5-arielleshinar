@@ -11,24 +11,25 @@ public class MyString {
         System.out.println("\nTesting subsetOf:");
         System.out.println("sap in space -> " + MyString.subsetOf("sap", "space") + " (expected: true)");
         System.out.println("spa in space -> " + MyString.subsetOf("spa", "space") + " (expected: true)");
-        System.out.println("pass in space -> " + MyString.subsetOf("pass", "space") + " (expected: false)");
-        System.out.println("c in space -> " + MyString.subsetOf("c", "space") + " (expected: true)");
-        System.out.println("empty string in anything -> " + MyString.subsetOf("", "anything") + " (expected: true)");
-        System.out.println("\nTesting spacedString:");
-        System.out.println("silent -> \"" + MyString.spacedString("silent") + "\" (expected: s i l e n t)");
-        System.out.println("a -> \"" + MyString.spacedString("a") + "\" (expected: a)");
-        System.out.println("empty string -> \"" + MyString.spacedString("") + "\" (expected: )");
-        System.out.println("hi -> \"" + MyString.spacedString("hi") + "\" (expected: h i)");
-        System.out.println("\nTesting randomStringOfLetters:");
-        System.out.println("length 5 -> " + MyString.randomStringOfLetters(5));
-        System.out.println("length 10 -> " + MyString.randomStringOfLetters(10));
-        System.out.println("length 0 -> \"" + MyString.randomStringOfLetters(0) + "\"");
-        System.out.println("\nTesting remove:");
-        System.out.println("committee - meet -> " + MyString.remove("committee", "meet") + " (expected: comit)");
-        System.out.println("abc - abc -> " + MyString.remove("abc", "abc") + " (expected: )");
-        System.out.println("abc - b -> " + MyString.remove("abc", "b") + " (expected: ac)");
-        System.out.println("hello - empty string -> " + MyString.remove("hello", "") + " (expected: hello)");
-       
+        //System.out.println("pass in space -> " + MyString.subsetOf("pass", "space") + " (expected: false)");
+        //System.out.println("c in space -> " + MyString.subsetOf("c", "space") + " (expected: true)");
+        //System.out.println("empty string in anything -> " + MyString.subsetOf("", "anything") + " (expected: true)");
+        //System.out.println("\nTesting spacedString:");
+        //System.out.println("silent -> \"" + MyString.spacedString("silent") + "\" (expected: s i l e n t)");
+        //System.out.println("a -> \"" + MyString.spacedString("a") + "\" (expected: a)");
+        //System.out.println("empty string -> \"" + MyString.spacedString("") + "\" (expected: )");
+        //System.out.println("hi -> \"" + MyString.spacedString("hi") + "\" (expected: h i)");
+        //System.out.println("\nTesting randomStringOfLetters:");
+        //System.out.println("length 5 -> " + MyString.randomStringOfLetters(5));
+        //System.out.println("length 10 -> " + MyString.randomStringOfLetters(10));
+        //System.out.println("length 0 -> \"" + MyString.randomStringOfLetters(0) + "\"");
+        //System.out.println("\nTesting remove:");
+        //System.out.println("committee - meet -> " + MyString.remove("committee", "meet") + " (expected: comit)");
+       // System.out.println("abc - abc -> " + MyString.remove("abc", "abc") + " (expected: )");
+       // System.out.println("abc - b -> " + MyString.remove("abc", "b") + " (expected: ac)");
+     //   System.out.println("hello - empty string -> " + MyString.remove("hello", "") + " (expected: hello)");
+        System.out.println("runi in quiz -> " + MyString.subsetOf("runi", "quiz") + " (expected: false)");
+
     }
 
     /**
@@ -70,11 +71,12 @@ public class MyString {
          }
          //create a for loop that checks no letter appears in str1 more than in str2
          for (int i = 0; i < str1.length(); i++){
-            if (countChar(str1, str1.charAt(i)) > countChar(str2, str2.charAt(i))){
+            char c = str1.charAt(i);
+            if (countChar(str1, c) > countChar(str2, c)){
                 return false;
             }
          }
-         
+
         return true;
     }
 

@@ -73,7 +73,7 @@ public class Scrabble {
 		int score = 0;
 	
 		// Add bonus for word length == 10
-		if (word.length() == 10) {
+		if (word.length() == word.length()) {
 			score += 50;
 		}
 	
@@ -208,7 +208,7 @@ public class Scrabble {
 		testScrabbleScore();    
 		testCreateHands();  
 		testPlayHands();
-		//playGame();
+		playGame();
 
 		
 	}

@@ -132,7 +132,7 @@ public class Scrabble {
     // 1. The letters in the word are removed from the hand, which becomes smaller.
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
-	/*
+	
 	public static void playHand(String hand) {
 		int n = hand.length();
 		int score = 0;
@@ -148,57 +148,20 @@ public class Scrabble {
 			// end-of-line characters.
 			String input = in.readString();
 
-			if (input.equals(dot)) {
-				System.out.println("End of hand. Total score: " + score + " points");
-				break;  // End the hand
-			} else if (!MyString.subsetOf(input, hand)) {
-				System.out.println("Invalid word. Try again.");
-			} else if (!isWordInDictionary(input)) {
-				System.out.println("No such word in the dictionary. Try again.");
-			} else {
-				// Valid word, process the score and remove letters from hand
-				score += wordScore(input);
-				hand = remove(hand, input);
-				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
-			}
-		}
-		if (hand.length() == 0) {
-	        System.out.println("Ran out of letters. Total score: " + score + " points");
-		}
-	}
-	 */
-	public static void playHand(String hand) {
-		int score = 0;
-		String dot = ".";
-		In in = new In();
-	
-		// Track if a word was successfully played
-		boolean wordPlayed = false;
-	
-		while (hand.length() > 0) {
-			// Print current hand
-			System.out.println("Current Hand: " + MyString.spacedString(hand));
-			System.out.println("Enter a word, or '.' to finish playing this hand:");
-	
-			String input = in.readString().trim();
-	
-			// If user finishes the hand
+				// If user finishes the hand
 			if (input.equals(dot)) {
 				System.out.println("End of hand. Total score: " + score + " points");
 				break;
-			}
-	
-			// Check if word can be formed from hand
+
+			} // Check if word can be formed from hand
 			if (!MyString.subsetOf(input, hand)) {
 				continue;  // Skip invalid word, don't print anything
 			}
-	
 			// Check if word is in the dictionary
 			if (!isWordInDictionary(input)) {
 				continue;  // Skip invalid word, don't print anything
 			}
-	
-			// Calculate score for the word
+				// Calculate score for the word
 			int wordScore = wordScore(input);
 			score += wordScore;
 	
@@ -207,13 +170,10 @@ public class Scrabble {
 	
 			// Print the word and its score in the expected format
 			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
-			wordPlayed = true;  // Set flag for a word being played
+		
 		}
-	
-		// End of hand output
-		if (wordPlayed) {
-			System.out.println("End of hand. Total score: " + score + " points");
-		}
+		if (hand.length() == 0) {
+			System.out.println("End of hand. Total score: " + score + " points");		}
 	}
 	
 	
@@ -254,11 +214,7 @@ public class Scrabble {
 		}
 
 	public static void main(String[] args) {
-		//System.out.println("'' -> " + Scrabble.isWordInDictionary("") + " (expected: false)");
-		//System.out.println("'CAT' -> " + Scrabble.isWordInDictionary("CAT") + " (expected: false)");
-		//System.out.println("'xyz123' -> " + Scrabble.isWordInDictionary("xyz123") + " (expected: false)");
-		//System.out.println("'qwxz' -> " + Scrabble.isWordInDictionary("qwxz") + " (expected: false)");
-
+		
 		
 		//// Uncomment the test you want to run
 		testBuildingTheDictionary();  

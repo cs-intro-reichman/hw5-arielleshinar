@@ -172,51 +172,50 @@ public class Scrabble {
 		String dot = ".";
 		In in = new In();
 	
-		// Flag to check if at least one word is played
-		boolean validWordPlayed = false;
+		// Track if a word was successfully played
+		boolean wordPlayed = false;
 	
 		while (hand.length() > 0) {
-			// Only print the current hand once at the start of the loop
+			// Print current hand
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
 	
 			String input = in.readString().trim();
 	
-			// If the user inputs '.', end the hand
+			// If user finishes the hand
 			if (input.equals(dot)) {
 				System.out.println("End of hand. Total score: " + score + " points");
-				break;  // End the hand
+				break;
 			}
 	
-			// Check if the word can be made from the available letters in the hand
+			// Check if word can be formed from hand
 			if (!MyString.subsetOf(input, hand)) {
-				// If it's not possible to make the word from the hand, skip it silently
-				continue;
+				continue;  // Skip invalid word, don't print anything
 			}
 	
-			// Check if the word is in the dictionary
+			// Check if word is in the dictionary
 			if (!isWordInDictionary(input)) {
-				// If it's not a valid word in the dictionary, skip it silently
-				continue;
+				continue;  // Skip invalid word, don't print anything
 			}
 	
-			// Word is valid, calculate its score
+			// Calculate score for the word
 			int wordScore = wordScore(input);
 			score += wordScore;
-			hand = remove(hand, input);  // Remove the used letters from the hand
 	
-			// Output the word and score in the required format
+			// Remove the word from hand
+			hand = remove(hand, input);
+	
+			// Print the word and its score in the expected format
 			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
-	
-			// Mark that a valid word was played
-			validWordPlayed = true;
+			wordPlayed = true;  // Set flag for a word being played
 		}
 	
-		// Final check if we exhausted the letters in the hand
-		if (validWordPlayed && hand.length() == 0) {
+		// End of hand output
+		if (wordPlayed && hand.length() == 0) {
 			System.out.println("Ran out of letters. Total score: " + score + " points");
 		}
 	}
+	
 	
 
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'

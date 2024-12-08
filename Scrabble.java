@@ -196,11 +196,11 @@ public class Scrabble {
 	
 			//// checks if its n or e
 			if (input.length() != 1) {
-				System.out.println("Not a valid answer, try again.");
+				//System.out.println("Not a valid answer, try again.");
 				continue;  // Continue the loop to prompt again
 			}
 			if (input.charAt(0) != 'n' && input.charAt(0) != 'e') {
-				System.out.println("Not a valid answer, try again.");
+				//System.out.println("Not a valid answer, try again.");
 				continue; // Continue the loop
 			}
 			// Exit the loop and end the game

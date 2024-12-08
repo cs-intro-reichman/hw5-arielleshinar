@@ -54,13 +54,14 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		word = word.toLowerCase(); // Ensure input word is always lowercase
-		int check = 0;
-		while (check < NUM_OF_WORDS && !DICTIONARY[check].equals(word)) {
-			check++;
+		
+		for (int i = 0; i < NUM_OF_WORDS; i++){
+			if(DICTIONARY[i] != null && DICTIONARY[i].equals(word)){
+				return true;
+			}
 		}
-	
-		return DICTIONARY[check].equals(word);
+		return false;
+		
 	}
 	
 	// Returns the Scrabble score of the given word.
@@ -196,14 +197,23 @@ public class Scrabble {
 		}
 
 	public static void main(String[] args) {
+		//System.out.println("'' -> " + Scrabble.isWordInDictionary("") + " (expected: false)");
+		//System.out.println("'CAT' -> " + Scrabble.isWordInDictionary("CAT") + " (expected: false)");
+		//System.out.println("'xyz123' -> " + Scrabble.isWordInDictionary("xyz123") + " (expected: false)");
+		//System.out.println("'qwxz' -> " + Scrabble.isWordInDictionary("qwxz") + " (expected: false)");
+
+		
 		//// Uncomment the test you want to run
 		testBuildingTheDictionary();  
 		testScrabbleScore();    
 		testCreateHands();  
 		testPlayHands();
-		playGame();
+		//playGame();
+
+		
 	}
 
+	
 	public static void testBuildingTheDictionary() {
 		init();
 		// Prints a few words

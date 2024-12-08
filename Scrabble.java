@@ -55,8 +55,8 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		
-		for (int i = 0; i < NUM_OF_WORDS; i++){
-			if(DICTIONARY[i] != null && DICTIONARY[i].equals(word)){
+		for (int i = 0; i < DICTIONARY.length; i++){
+			if(word.equals(DICTIONARY[i])){
 				return true;
 			}
 		}
@@ -77,23 +77,21 @@ public class Scrabble {
 		for (int i = 0; i < word.length(); i++) {
 			char letter = word.charAt(i);
 			if (letter >= 'a' && letter <= 'z'){
-				int index = letter - 'a'; 
-				score += SCRABBLE_LETTER_VALUES[index];
+				score += SCRABBLE_LETTER_VALUES[letter - 'a'];
 			}
 		}
 			score *= word.length();
-	
+		
+		// Add bonus for word length == 10
+		if (word.length() == 10){
+			score += 50;
+		}
 	
 		// Add bonus for "runi"
 		if (MyString.subsetOf(runi, word) == true) {
 			score += 1000;
 		}
 
-		// Add bonus for word length == 10
-		if (word.length() == 10){
-			score += 50;
-		}
-	
 		return score;
 	}
 
@@ -134,12 +132,11 @@ public class Scrabble {
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	
 	public static void playHand(String hand) {
-		int n = hand.length();
 		int score = 0;
-		String dot = ".";
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
 		In in = new In();
+
 		while (hand.length() > 0) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
 			System.out.println("Enter a word, or '.' to finish playing this hand:");
@@ -149,35 +146,37 @@ public class Scrabble {
 			String input = in.readString();
 
 				// If user finishes the hand
-			if (input.equals(dot)) {
+			if (input.equals(".")) {
+				System.out.println("End of hand. Total score: " + score + " points");
 				break;
+			} 
 
-			} // Check if word can be formed from hand
-			if (!MyString.subsetOf(input, hand)) {
+			// Check if word can be formed from hand
+			if (MyString.subsetOf(input, hand)) {
+				
+				// Check if word is in the dictionary
+				if (isWordInDictionary(input)) {
+					// Calculate score for the word
+					int wordScore = wordScore(input);
+					score += wordScore;
+				
+					// Remove the word from hand
+					hand = remove(hand, input);
+					System.out.println( input + " earned " + wordScore + " points. Score: " + score + " points\n");
+				}
+				else
+				{
+					System.out.println("No such word in the dictionary. Try again.");
+				}
+			} 
+			else
+			{
 				System.out.println("Invalid word. Try again.");
-				continue;  // Skip invalid word, don't print anything
 			}
-			// Check if word is in the dictionary
-			if (!isWordInDictionary(input)) {
-				System.out.println("No such word in the dictionary. Try again.");
-				continue;  // Skip invalid word, don't print anything
-			}
-				// Calculate score for the word
-			int wordScore = wordScore(input);
-			score += wordScore;
-	
-			// Remove the word from hand
-			hand = remove(hand, input);
-	
-			// Print the word and its score in the expected format
-			System.out.println( input + " earned " + wordScore + " points. Score: " + score + " points \n");
-		
 		}
 		if (hand.length() == 0) {
 			System.out.println("End of hand. Total score: " + score + " points");	
-			} else {
-				System.out.println("End of hand. Total score: " + score + " points");
-			}
+			} 			
 	}
 	
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'

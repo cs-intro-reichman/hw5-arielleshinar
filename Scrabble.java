@@ -168,7 +168,7 @@ public class Scrabble {
 			hand = remove(hand, input);
 	
 			// Print the word and its score in the expected format
-			System.out.println(input + " earned " + wordScore + " points. Score: " + score + " points");
+			System.out.println( input + " earned " + wordScore + " points. Score: " + score + " points \n");
 		
 		}
 		if (hand.length() == 0) {

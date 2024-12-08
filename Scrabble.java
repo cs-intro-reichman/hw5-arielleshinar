@@ -211,10 +211,11 @@ public class Scrabble {
 		}
 	
 		// End of hand output
-		if (wordPlayed && hand.length() == 0) {
-			System.out.println("Ran out of letters. Total score: " + score + " points");
+		if (wordPlayed) {
+			System.out.println("End of hand. Total score: " + score + " points");
 		}
 	}
+	
 	
 	
 
